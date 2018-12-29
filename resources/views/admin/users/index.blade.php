@@ -4,6 +4,12 @@
 @section('content')
 
 
+    @if(Session::has('alert_user'))
+
+        <p class="bg-danger">{{session('alert_user')}}</p>
+
+    @endif
+
     <h1>Users</h1>
 
     <table class="table">
