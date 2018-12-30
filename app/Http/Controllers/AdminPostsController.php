@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AdminPostsController extends Controller
 {
@@ -57,8 +58,9 @@ class AdminPostsController extends Controller
             $input['photo_id'] = $photo->id;
         }
 
-        $user->posts()->create($input);
+        $post =$user->posts()->create($input);
 
+        Session::flash('alert_user','The Post '.$post->title .' has been Created');
 
         return redirect(route('admin.posts.index'));
     }
@@ -82,7 +84,11 @@ class AdminPostsController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.posts.edit');
+
+        $categories = Category::lists('name','id')->all();
+        $post = Post::findOrFail($id);
+
+        return view('admin.posts.edit',compact('post','categories'));
     }
 
     /**
@@ -94,7 +100,26 @@ class AdminPostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        $input = $request->all();
+
+        if($file = $request->file('photo_id')){
+
+            $name = time().$file->getClientOriginalName();
+            $file->move('images',$name);
+            $photo = Photo::create(['file' => $name]);
+            $input['photo_id'] = $photo->id;
+        }
+
+        $user = Auth::user();
+
+        $post = $user->posts()->whereId($id)->first();
+        $post->update($input);
+
+        Session::flash('alert_user','The Post '.$post->title .' has been Updated');
+
+        return redirect(route('admin.posts.index'));
     }
 
     /**
@@ -105,6 +130,16 @@ class AdminPostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        if($photo=$post->photo){
+            unlink(public_path().$photo->file);
+            $photo->delete();
+        }
+
+        $post->delete();
+        Session::flash('alert_user','The Post '.$post->title .' has been deleted');
+
+        return redirect(route('admin.posts.index'));
     }
 }
