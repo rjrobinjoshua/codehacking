@@ -22,7 +22,7 @@ class AdminPostsController extends Controller
     public function index()
     {
 
-        $posts = Post::all();
+        $posts = Post::paginate(2);
         return view('admin.posts.index',compact('posts'));
     }
 
@@ -141,5 +141,16 @@ class AdminPostsController extends Controller
         Session::flash('alert_user','The Post '.$post->title .' has been deleted');
 
         return redirect(route('admin.posts.index'));
+    }
+
+    public function post($slug){
+
+        $post = Post::findBySlug($slug);
+        $comments = $post->comments()->whereIsActive(1)->get();
+
+
+
+        return view('post',compact('post','comments'));
+
     }
 }
