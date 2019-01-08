@@ -60,8 +60,7 @@ class AdminMediasController extends Controller
 //
 //        }
 
-        if(isset($request->delete_all) && count($request->checkBoxArray) > 1) {
-
+        if(isset($request->delete_all) && $request->checkBoxArray!="") {
             $photos = Photo::findOrFail($request->checkBoxArray);
 
             foreach ($photos as $photo) {
