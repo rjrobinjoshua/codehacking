@@ -17,9 +17,7 @@ if(version_compare(PHP_VERSION,'7.2.0','>=')){
     error_reporting(E_ALL ^ E_NOTICE ^E_WARNING);
 }
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
 
 Auth::routes();
 
@@ -31,17 +29,10 @@ Route::get('/post/{id}',['as'=>'home.post','uses'=>'AdminPostsController@post'])
 
 Route::group(['middleware'=>'admin'],function(){
 
-    Route::get('/admin', function(){
-
-
-        return view('admin.index');
-
-
-    });
+    Route::get('/admin', 'AdminController@index');
 
 
     Route::resource('admin/users', 'AdminUsersController',['names'=>[
-
 
         'index'=>'admin.users.index',
         'show'=>'admin.users.show',
@@ -50,8 +41,6 @@ Route::group(['middleware'=>'admin'],function(){
         'edit'=>'admin.users.edit',
         'update'=>'admin.users.update',
         'destroy'=>'admin.users.destroy',
-
-
 
     ]]);
 
@@ -64,8 +53,6 @@ Route::group(['middleware'=>'admin'],function(){
         'edit'=>'admin.posts.edit',
         'update'=>'admin.posts.update',
         'destroy'=>'admin.posts.destroy',
-
-
 
     ]]);
 
@@ -91,13 +78,11 @@ Route::group(['middleware'=>'admin'],function(){
         'update'=>'admin.media.update',
         'destroy'=>'admin.media.destroy',
 
-
     ]]);
 
     Route::delete('/admin/delete/media','AdminMediasController@deleteMedia');
 
     Route::resource('admin/comments','PostCommentsController',['names'=>[
-
 
         'index'=>'admin.comments.index',
         'show'=>'admin.comments.show',
@@ -107,11 +92,9 @@ Route::group(['middleware'=>'admin'],function(){
         'update'=>'admin.comments.update',
         'destroy'=>'admin.comments.destroy',
 
-
     ]]);
 
     Route::resource('admin/comments/replies','CommentRepliesController',['names'=>[
-
 
         'index'=>'admin.comments.replies.index',
         'show'=>'admin.comments.replies.show',
@@ -120,7 +103,6 @@ Route::group(['middleware'=>'admin'],function(){
         'edit'=>'admin.comments.replies.edit',
         'update'=>'admin.comments.replies.update',
         'destroy'=>'admin.comments.replies.destroy',
-
 
     ]]);
 
