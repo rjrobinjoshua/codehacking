@@ -15,11 +15,11 @@
             <ul class="nav navbar-nav navbar-right">
 
                 @if(Auth::guest())
-                    <li><a href="{{url('/login')}}">Login</a></li>
-                    <li><a href="{{url('/register')}}">Register</a></li>
+                    <li><a href="{{route('login')}}">Login</a></li>
+                    <li><a href="{{route('register')}}">Register</a></li>
                 @else
-                    <li><a href="/admin">Admin</a></li>
-                    <li><a href="/logout">Logout</a></li>
+                    <li><a href="{{route('admin')}}">Admin</a></li>
+                    <li><a href="{{route('logout')}}">Logout</a></li>
                 @endif
             </ul>
         </div>

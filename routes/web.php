@@ -29,7 +29,7 @@ Route::get('/post/{id}',['as'=>'home.post','uses'=>'HomeController@post']);
 
 Route::group(['middleware'=>'admin'],function(){
 
-    Route::get('/admin', 'AdminController@index');
+    Route::get('/admin', ['as'=>'admin','uses'=>'AdminController@index']);
 
 
     Route::resource('admin/users', 'AdminUsersController',['names'=>[
