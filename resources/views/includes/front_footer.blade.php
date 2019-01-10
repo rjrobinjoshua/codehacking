@@ -2,7 +2,7 @@
 <footer>
     <div class="row">
         <div class="col-lg-12">
-            <p>Copyright &copy; Robin Joshua 2019</p>
+            <p>Copyright &copy; Robin Joshua {{Illuminate\Support\Carbon::now()->year}}</p>
         </div>
         <!-- /.col-lg-12 -->
     </div>

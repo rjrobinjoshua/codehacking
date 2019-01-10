@@ -142,15 +142,4 @@ class AdminPostsController extends Controller
 
         return redirect(route('admin.posts.index'));
     }
-
-    public function post($slug){
-
-        $post = Post::findBySlug($slug);
-        $comments = $post->comments()->whereIsActive(1)->get();
-
-
-
-        return view('post',compact('post','comments'));
-
-    }
 }
