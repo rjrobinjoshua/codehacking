@@ -21,6 +21,9 @@ Route::get('/', ['as'=>'home','uses'=>'HomeController@index']);
 
 Auth::routes();
 
+Route::get('activate/{token}', 'Auth\RegisterController@activate')
+    ->name('activate');
+
 Route::get('/logout','Auth\LoginController@logout');
 
 Route::get('/home', 'HomeController@index');

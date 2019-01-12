@@ -23,11 +23,13 @@ class Admin
 
                 return $next($request);
             }
+            else{
+                return redirect(404);
+            }
 
         }
 
-
-        return redirect(404);
+        return redirect(route('login'));
 
     }
 }

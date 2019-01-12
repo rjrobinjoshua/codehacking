@@ -4,15 +4,22 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use Illuminate\Notifications\Notifiable;
+
 class User extends Authenticatable
 {
+
+    const ACTIVE = 2;
+    const INACTIVE = 1;
+
+    use Notifiable;
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','role_id','is_active','photo_id'
+        'name', 'email', 'password','role_id','is_active','photo_id','token'
     ];
 
     /**
