@@ -60,10 +60,20 @@ class LoginController extends Controller
 
     protected function validateLogin(Request $request)
     {
-        $messages = ["{$this->username()}.exists" => 'The account you are trying to login is not activated or awaiting Administrator approval.'];
+
+        $userDoesnotExist = ["{$this->username()}.exists" => 'User does not exist, please register.'];
+        $userIsNotActive = ["{$this->username()}.exists" => 'The account you are trying to login is not activated or awaiting approval.'];
+
+
+
+        $this->validate($request, [
+            $this->username() => 'required|string|exists:users,email',
+            'password' => 'required|string',
+        ],$userDoesnotExist);
+
         $this->validate($request, [
             $this->username() => 'required|string|exists:users,email,is_active,' . User::APPROVED,
             'password' => 'required|string',
-        ],$messages);
+        ],$userIsNotActive);
     }
 }
