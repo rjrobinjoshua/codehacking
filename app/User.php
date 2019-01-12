@@ -9,8 +9,10 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
 
-    const ACTIVE = 2;
-    const INACTIVE = 1;
+    const APPROVED = 2;
+    const ACTIVE = 1;
+    const INACTIVE = 0;
+
 
     use Notifiable;
     /**
@@ -44,7 +46,7 @@ class User extends Authenticatable
 
     public function isAdmin(){
 
-        if($this->role->name=='Administrator' && $this->is_active==1){
+        if($this->role->name=='Administrator' && $this->is_active==2){
 
             return true;
         }else{

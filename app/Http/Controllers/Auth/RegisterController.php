@@ -110,6 +110,6 @@ class RegisterController extends Controller
         $user->update(['token' => null, 'is_active' => User::ACTIVE]);
 
         return redirect()->route('login')
-            ->with(['success' => 'Congratulations! your account is now activated.']);
+            ->with(['success' => 'Congratulations! your account is now activated. Awaiting Administrator approval!']);
     }
 }
