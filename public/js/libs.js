@@ -2576,7 +2576,7 @@ if (typeof posts !== 'undefined') {
             source: autocomplete.sources.hits(posts, {hitsPerPage: 5}),
             displayKey: 'title',
             templates: {
-                header: '<div class="aa-suggestions-category">Posts</div>',
+                header: '<div class="aa-suggestions-category"><b>Title</b></div>',
                 footer: '<div class="branding">Powered by <img height="30" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-logo-light.svg" /></div>',
                 suggestion: function (suggestion) {
                     return '<span>' + '<a href="' + postUri + '/' + suggestion.slug + '">' +
