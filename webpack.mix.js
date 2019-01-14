@@ -10,7 +10,8 @@ mix.styles([
     'resources/assets/css/libs/bootstrap.css',
     'resources/assets/css/libs/font-awesome.css',
     'resources/assets/css/libs/metisMenu.css',
-    'resources/assets/css/libs/sb-admin-2.css'
+    'resources/assets/css/libs/sb-admin-2.css',
+    'resources/assets/css/libs/search.css'
 
 ], 'public/css/libs.css');
 
@@ -19,6 +20,9 @@ mix.scripts([
     'resources/assets/js/libs/bootstrap.js',
     'resources/assets/js/libs/sb-admin-2.js',
     'resources/assets/js/libs/metisMenu.js',
-    'resources/assets/js/libs/scripts.js'
+    'resources/assets/js/libs/scripts.js',
+    'resources/assets/js/libs/algoliasearch.min.js',
+    'resources/assets/js/libs/autocomplete.min.js',
+    'resources/assets/js/libs/search.js'
 
 ], 'public/js/libs.js');

@@ -4,9 +4,12 @@ namespace App;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Post extends Model
 {
+
+    use Searchable;
 
     use Sluggable;
 
@@ -55,6 +58,31 @@ class Post extends Model
 
         return "http://placehold.it/700x200";
 
+    }
+
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+
+        // Applies Scout Extended default transformations:
+        $array = $this->transform($array);
+
+        // Add an extra attribute:
+        $array['category_name'] = $this->category->name;
+        $array['user_name'] = $this->user->name;
+
+        //remove unnecessary attributes
+        unset($array['photo_id']);
+        unset($array['user_id']);
+        unset($array['category_id']);
+
+        return $array;
     }
 
 }
