@@ -39,7 +39,7 @@
                     @else
                         <td>No Role</td>
                     @endif
-                    <td>{{$user->is_active==2?"Approved":$user->is_active==1?"Active":"Not Active"}}</td>
+                    <td>{{$user->is_active==2?"Approved":($user->is_active==1?"Active":"Not Active")}}</td>
                     <td>{{$user->created_at->diffForHumans()}}</td>
                     <td>{{$user->updated_at->diffForHumans()}}</td>
                 </tr>
